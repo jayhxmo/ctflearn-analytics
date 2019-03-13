@@ -13,7 +13,9 @@
   "author": "Jay Mo",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "bluebird": "^3.5.3",
     "express": "^4.16.3",
     "mysql": "^2.16.0",
     "react": "^16.5.2",

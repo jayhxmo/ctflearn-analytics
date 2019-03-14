@@ -11,7 +11,8 @@ export default class App extends React.Component {
     this.state = {
       dataSubmissions: undefined,
       dataUsers: undefined,
-      dataComments: undefined
+      dataComments: undefined,
+      dataGroups: undefined
     };
 
     this.timeframes = {
@@ -58,6 +59,13 @@ export default class App extends React.Component {
         this.setState({ dataComments: JSON.stringify(res.data) });
         console.log(res.data);
       });
+
+    axios
+      .get(`/api/groups?start=${this.timeframes.january.start}&end=${this.timeframes.january.end}`)
+      .then(res => {
+        this.setState({ dataGroups: JSON.stringify(res.data) });
+        console.log(res.data);
+      });
   }
 
   render() {
@@ -73,6 +81,8 @@ export default class App extends React.Component {
         <p style={wordBreak}>{this.state.dataUsers}</p>
         <h3>Comments</h3>
         <p style={wordBreak}>{this.state.dataComments}</p>
+        <h3>Groups</h3>
+        <p style={wordBreak}>{this.state.dataGroups}</p>
       </div>
     );
   }

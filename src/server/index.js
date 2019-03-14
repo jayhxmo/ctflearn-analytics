@@ -5,6 +5,7 @@ const Promise = require('bluebird');
 const queryUsers = require('./queries/queryUsers');
 const querySubmissions = require('./queries/querySubmissions');
 const queryComments = require('./queries/queryComments');
+const queryGroups = require('./queries/queryGroups');
 
 const mysql = require('mysql');
 const connection = mysql.createConnection({
@@ -30,6 +31,10 @@ app.get('/api/users', (req, res) => {
 
 app.get('/api/comments', (req, res) => {
 	queryComments(req, res, connection);
+});
+
+app.get('/api/groups', (req, res) => {
+	queryGroups(req, res, connection);
 });
 
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));

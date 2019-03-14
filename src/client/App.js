@@ -27,6 +27,12 @@ export default class App extends React.Component {
       .then(res => {
         console.log(res.data);
       });
+
+    axios
+      .get(`/api/users?start=${this.timeframes.january.start}&end=${this.timeframes.january.end}`)
+      .then(res => {
+        console.log(res.data);
+      });
     // .then(res => console.log(res.json()));
   }
 

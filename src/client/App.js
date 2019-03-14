@@ -8,38 +8,71 @@ export default class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      dataSubmissions: undefined,
+      dataUsers: undefined,
+      dataComments: undefined
+    };
+
     this.timeframes = {
       january: {
         start: '2019-01-01 00:00:00'.replace(' ', '%20'),
         end: '2019-02-01 00:00:00'.replace(' ', '%20')
       }
     };
+
+    this.monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
   }
 
   componentDidMount() {
-    // fetch('/api/getUsername')
-    //   .then(res => res.json())
-    //   .then(user => this.setState({ username: user.username }));
-
     axios
       .get(`/api/submissions?start=${this.timeframes.january.start}&end=${this.timeframes.january.end}`)
       .then(res => {
+        this.setState({ dataSubmissions: JSON.stringify(res.data) });
         console.log(res.data);
       });
 
     axios
       .get(`/api/users?start=${this.timeframes.january.start}&end=${this.timeframes.january.end}`)
       .then(res => {
+        this.setState({ dataUsers: JSON.stringify(res.data) });
         console.log(res.data);
       });
-    // .then(res => console.log(res.json()));
+
+    axios
+      .get(`/api/comments?start=${this.timeframes.january.start}&end=${this.timeframes.january.end}`)
+      .then(res => {
+        this.setState({ dataComments: JSON.stringify(res.data) });
+        console.log(res.data);
+      });
   }
 
   render() {
+    const wordBreak = { wordBreak: 'break-all' };
     return (
       <div>
-        <img src={ReactImage} alt="react" />
+        <h1>
+          Data for {this.monthNames[new Date(this.timeframes.january.start.replace('%20', ' ')).getMonth()]}
+        </h1>
+        <h3>Submissions</h3>
+        <p style={wordBreak}>{this.state.dataSubmissions}</p>
+        <h3>Users</h3>
+        <p style={wordBreak}>{this.state.dataUsers}</p>
+        <h3>Comments</h3>
+        <p style={wordBreak}>{this.state.dataComments}</p>
       </div>
     );
   }

@@ -1,8 +1,9 @@
 h1 {
-  color: green;
+	color: green;
 }
 
 body {
-  text-align: center;
-  margin: auto;
+	text-align: left;
+	margin: auto;
+	padding: 10vw;
 }

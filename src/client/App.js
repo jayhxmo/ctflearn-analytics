@@ -17,8 +17,8 @@ export default class App extends React.Component {
 
     this.timeframes = {
       january: {
-        start: '2019-01-01 00:00:00'.replace(' ', '%20'),
-        end: '2019-02-01 00:00:00'.replace(' ', '%20')
+        start: '2019-01-01 00:00:00 GMT',
+        end: '2019-02-01 00:00:00 GMT'
       }
     };
 
@@ -70,11 +70,10 @@ export default class App extends React.Component {
 
   render() {
     const wordBreak = { wordBreak: 'break-all' };
+
     return (
       <div>
-        <h1>
-          Data for {this.monthNames[new Date(this.timeframes.january.start.replace('%20', ' ')).getMonth()]}
-        </h1>
+        <h1>Data for {this.monthNames[new Date(this.timeframes.january.start).getUTCMonth()]}</h1>
         <h3>Submissions</h3>
         <p style={wordBreak}>{this.state.dataSubmissions}</p>
         <h3>Users</h3>
